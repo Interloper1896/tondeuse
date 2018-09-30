@@ -1,3 +1,10 @@
+#include <AzureIotHub.h>
+#include <Esp32MQTTClient.h>
+
+#include <Servo.h>
+
+#include <EEPROM.h>
+
 //*****************************************************************************
 // File Name:   Gatt-VRBOX-Tasks.ino
 // Author:      James R. Behrens
@@ -39,13 +46,13 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include "controller.h"
+#include "../../../../Arduino/hardware/espressif/esp32/tools/sdk/include/bluedroid/device/controller.h"
 #include "bt.h"
-#include "bt_trace.h"
-#include "bt_types.h"
-#include "btm_api.h"
-#include "bta_api.h"
-#include "bta_gatt_api.h"
+#include "../../../../Arduino/hardware/espressif/esp32/tools/sdk/include/bluedroid/common/bt_trace.h"
+#include "../../../../Arduino/hardware/espressif/esp32/tools/sdk/include/bluedroid/stack/bt_types.h"
+#include "../../../../Arduino/hardware/espressif/esp32/tools/sdk/include/bluedroid/stack/btm_api.h"
+#include "../../../../Arduino/hardware/espressif/esp32/tools/sdk/include/bluedroid/bta/bta_api.h"
+#include "../../../../Arduino/hardware/espressif/esp32/tools/sdk/include/bluedroid/bta/bta_gatt_api.h"
 #include "esp_gap_ble_api.h"
 #include "esp_gattc_api.h"
 #include "esp_gatt_defs.h"
@@ -102,7 +109,7 @@ static void gattc_hid_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t ga
 static void gattc_battery_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t gattc_if, esp_ble_gattc_cb_param_t *param);
 
 // name of BLE server that you want to connect to
-static const char device_name[] = "VR BOX";
+static const char device_name[] = "VR-PARK";
 static bool connect = false;
 
 // BLE scan params

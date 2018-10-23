@@ -1,60 +1,32 @@
-/*
- * Copyright (C) 2017 BlueKitchen GmbH
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of the copyright holders nor the names of
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- * 4. Any redistribution, use, or modification is done solely for
- *    personal benefit and not for any commercial purpose or for
- *    monetary gain.
- *
- * THIS SOFTWARE IS PROVIDED BY BLUEKITCHEN GMBH AND CONTRIBUTORS
- * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL MATTHIAS
- * RINGWALD OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
- * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
- * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
- * SUCH DAMAGE.
- *
- * Please inquire about commercial licensing options at 
- * contact@bluekitchen-gmbh.com
- *
- */
-
 #define __BTSTACK_FILE__ "hid_host_demo.c"
-
-/*
- * hid_host_demo.c
- */
-
-/* EXAMPLE_START(hid_host_demo): HID Host Demo
- *
- * @text This example implements an HID Host. For now, it connnects to a fixed device, queries the HID SDP
- * record and opens the HID Control + Interrupt channels
- */
 
 #include <inttypes.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "btstack_config.h"
 #include "btstack.h"
-#include "../../esp-idf/components/freertos/include/freertos/FreeRTOS.h"
+//#include "../../esp-idf/components/freertos/include/freertos/FreeRTOS.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+#include "esp_system.h"
+#include "driver/spi_master.h"
+#include "soc/gpio_struct.h"
+#include "driver/gpio.h"
 
 #define MAX_ATTRIBUTE_VALUE_SIZE 300
+
+
+//SPI PINS
+#define PIN_NUM_MISO 25
+#define PIN_NUM_MOSI 23
+#define PIN_NUM_CLK  19
+#define PIN_NUM_CS   22
+
+
+spi_device_handle_t spi;
+
 
 // SDP
 static uint8_t            hid_descriptor[MAX_ATTRIBUTE_VALUE_SIZE];
@@ -77,59 +49,6 @@ static bd_addr_t remote_addr;
 
 static btstack_packet_callback_registration_t hci_event_callback_registration;
 
-/*
-// Simplified US Keyboard with Shift modifier
-
-#define CHAR_ILLEGAL     0xff
-#define CHAR_RETURN     '\n'
-#define CHAR_ESCAPE      27
-#define CHAR_TAB         '\t'
-#define CHAR_BACKSPACE   0x7f
-*/
-
-/**
- * English (US)
- */
-
-/*
-static const uint8_t keytable_us_none [] = {
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,             
-    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',                   
-    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',                   
-    'u', 'v', 'w', 'x', 'y', 'z',                                       
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',                   
-    CHAR_RETURN, CHAR_ESCAPE, CHAR_BACKSPACE, CHAR_TAB, ' ',           
-    '-', '=', '[', ']', '\\', CHAR_ILLEGAL, ';', '\'', 0x60, ',',     
-    '.', '/', CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,         
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,        
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,       
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,      
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,     
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,    
-    '*', '-', '+', '\n', '1', '2', '3', '4', '5',             
-    '6', '7', '8', '9', '0', '.', 0xa7,                      
-}; 
-
-static const uint8_t keytable_us_shift[] = {
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, 
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',      
-    'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',     
-    'U', 'V', 'W', 'X', 'Y', 'Z',                        
-    '!', '@', '#', '$', '%', '^', '&', '*', '(', ')',   
-    CHAR_RETURN, CHAR_ESCAPE, CHAR_BACKSPACE, CHAR_TAB, ' ',           
-    '_', '+', '{', '}', '|', CHAR_ILLEGAL, ':', '"', 0x7E, '<',       
-    '>', '?', CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,         
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,        
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,       
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,      
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,     
-    CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL, CHAR_ILLEGAL,    
-    '*', '-', '+', '\n', '1', '2', '3', '4', '5',             
-    '6', '7', '8', '9', '0', '.', 0xb1,                      
-}; 
-*/
 
 /* @section Main application configuration
  *
@@ -153,6 +72,22 @@ static void hid_host_setup(void){
     setbuf(stdout, NULL);
 }
 /* LISTING_END */
+
+// Send data by SPI
+void send_data_spi(const uint8_t *data, int len)
+{
+	esp_err_t ret;
+	spi_transaction_t t;
+	if (len==0) return;
+	memset(&t, 0, sizeof(t));
+	t.length = len*8; // len is in bytes, transation length is in bits
+	t.tx_buffer = data;
+	t.user = (void*)1;
+	ret = spi_device_transmit(spi, &t);
+	assert(ret==ESP_OK);
+}
+
+
 
 /* @section SDP parser callback 
  * 
@@ -267,32 +202,6 @@ static void handle_sdp_client_query_result(uint8_t packet_type, uint16_t channel
 }
 
 /*
- * @section HID Report Handler
- * 
- * @text Use BTstack's compact HID Parser to process incoming HID Report
- * Iterate over all fields and process fields with usage page = 0x07 / Keyboard
- * Check if SHIFT is down and process first character (don't handle multiple key presses)
- * 
- */
-/*
-btstack_hid_parser_t parser;
-int32_t  value;
-uint16_t usage;
-uint16_t usage_page;
-static void hid_host_handle_interrupt_report(const uint8_t * report, uint16_t report_len){
-    // check if HID Input Report
-    if (report_len < 1) return;
-    if (*report != 0xa1) return; 
-    report++;
-    report_len--;
-    btstack_hid_parser_init(&parser, hid_descriptor, hid_descriptor_len, BTSTACK_HID_REPORT_TYPE_INPUT, report, report_len);
-    while (btstack_hid_parser_has_more(&parser)){
-        btstack_hid_parser_get_field(&parser, &usage_page, &usage, &value);
-	//printf("usage_page: %x, usage: %x, value: %x\n", usage_page, usage, value);
-    }
-}
-*/
-/*
  * @section Packet Handler
  * 
  * @text The packet handler responds to various HCI Events.
@@ -302,6 +211,7 @@ btstack_hid_parser_t parser;
 int32_t  value;
 uint16_t usage;
 uint16_t usage_page;
+uint8_t spi_data[3];
 
 /* LISTING_START(packetHandler): Packet Handler */
 static void packet_handler (uint8_t packet_type, uint16_t channel, uint8_t *packet, uint16_t size)
@@ -381,34 +291,43 @@ static void packet_handler (uint8_t packet_type, uint16_t channel, uint8_t *pack
         	    btstack_hid_parser_get_field(&parser, &usage_page, &usage, &value);
 		    //printf("usage_page: %x, usage: %x, value: %x\n", usage_page, usage, value);
 		    if(usage_page == 0xc && value == 1)
-		        switch(usage)
+		        switch(usage)    //void send_data_spi(const uint8_t *data, int len)
 			{
 			    case 0xe9:
-				puts("Button C\n");
+				//puts("Button C\n");
+				spi_data[0] = 3;
 				break;
 			    case 0x46:
-				puts("Button B or down\n");
+				//puts("Button B or down\n");
+				spi_data[0] = 2;
 				break;
 			    case 0xea:
-			        puts("Button D\n");
+			        //puts("Button D\n");
+				spi_data[0] = 4;
 				break;
 			    default:
 				break;
 			}
 		    else if(usage_page == 0x9 && value == 1)
-			puts("Button A or up\n");
+			//puts("Button A or up\n");
+		    	spi_data[0] = 1;
 		    else if(usage_page == 0x1)
 			switch(usage)
 			{
 			    case 0x30:
-			        printf("Joystick left/right:%d\n", value);
-			       	break;
+			        //printf("Joystick left/right:%d\n", value);
+			       	spi_data[1] = (uint8_t)(value+15);
+				spi_data[0] = 5;
+				break;
 			    case 0x31:
-			        printf("Joystick up/down:%d\n", value);
+			        //printf("Joystick up/down:%d\n", value);
+				spi_data[2] = (uint8_t)(value+15);
+				spi_data[0] = 6;
 				break;
 			    default:
 				break;
 			}
+		    send_data_spi(spi_data, 3);
     		}
 		portENABLE_INTERRUPTS();
             } else if (channel == l2cap_hid_control_cid){
@@ -428,6 +347,26 @@ int btstack_main(int argc, const char * argv[]){
 
     (void)argc;
     (void)argv;
+
+    esp_err_t ret;
+    spi_bus_config_t buscfg={
+	    .miso_io_num=PIN_NUM_MISO,
+	    .mosi_io_num=PIN_NUM_MOSI,
+	    .sclk_io_num=PIN_NUM_CLK,
+	    .quadwp_io_num=-1,
+	    .quadhd_io_num=-1,
+	    .max_transfer_sz=20
+	};
+	spi_device_interface_config_t devcfg={
+		.clock_speed_hz=10*1000*1000,
+		.mode=0,
+		.spics_io_num=PIN_NUM_CS,
+		.queue_size=7
+	};
+	ret = spi_bus_initialize(HSPI_HOST, &buscfg, 1);
+	ESP_ERROR_CHECK(ret);
+	ret = spi_bus_add_device(HSPI_HOST, &devcfg, &spi);
+	ESP_ERROR_CHECK(ret);
 
     hid_host_setup();
 

@@ -1,5 +1,5 @@
 vr_remote_host_main.o: \
- /home/louis/esp/vr_remote_host/main/vr_remote_host_main.c \
+ /home/louis/projects/tondeuse/tondeuseESP32/vr_remote_host/main/vr_remote_host_main.c \
  /home/louis/esp/esp-idf/components/newlib/include/inttypes.h \
  /home/louis/esp/esp-idf/components/newlib/include/newlib.h \
  /home/louis/esp/esp-idf/components/newlib/include/sys/_intsup.h \
@@ -21,6 +21,11 @@ vr_remote_host_main.o: \
  /home/louis/esp/esp-idf/components/newlib/include/machine/types.h \
  /home/louis/esp/esp-idf/components/newlib/include/sys/sched.h \
  /home/louis/esp/esp-idf/components/newlib/include/sys/stdio.h \
+ /home/louis/esp/esp-idf/components/newlib/include/stdlib.h \
+ /home/louis/esp/esp-idf/components/newlib/include/machine/stdlib.h \
+ /home/louis/esp/esp-idf/components/newlib/include/alloca.h \
+ /home/louis/esp/esp-idf/components/newlib/include/string.h \
+ /home/louis/esp/esp-idf/components/newlib/include/sys/string.h \
  /home/louis/esp/esp-idf/components/btstack/include/btstack_config.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack.h \
  /home/louis/esp/esp-idf/components/btstack/src/ad_parser.h \
@@ -32,8 +37,6 @@ vr_remote_host_main.o: \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_audio.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_control.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_util.h \
- /home/louis/esp/esp-idf/components/newlib/include/string.h \
- /home/louis/esp/esp-idf/components/newlib/include/sys/string.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_defines.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_linked_list.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_debug.h \
@@ -53,9 +56,6 @@ vr_remote_host_main.o: \
  /home/louis/esp/esp-idf/components/btstack/src/ble/att_db.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_linked_list.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_defines.h \
- /home/louis/esp/esp-idf/components/newlib/include/stdlib.h \
- /home/louis/esp/esp-idf/components/newlib/include/machine/stdlib.h \
- /home/louis/esp/esp-idf/components/newlib/include/alloca.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_hid_parser.h \
  /home/louis/esp/esp-idf/components/btstack/src/btstack_memory.h \
  /home/louis/esp/esp-idf/components/btstack/src/hci.h \
@@ -117,17 +117,17 @@ vr_remote_host_main.o: \
  /home/louis/esp/esp-idf/components/btstack/src/classic/sdp_client_rfcomm.h \
  /home/louis/esp/esp-idf/components/btstack/src/classic/sdp_util.h \
  /home/louis/esp/esp-idf/components/btstack/src/classic/spp_server.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/FreeRTOS.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/FreeRTOSConfig.h \
- /home/louis/esp/vr_remote_host/build/include/sdkconfig.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/xtensa_config.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/FreeRTOS.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/FreeRTOSConfig.h \
+ /home/louis/projects/tondeuse/tondeuseESP32/vr_remote_host/build/include/sdkconfig.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/xtensa_config.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/hal.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/config/core.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/xtensa-versions.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/config/core-matmap.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/config/tie.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/config/system.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/xtensa_context.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/xtensa_context.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/corebits.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/xtruntime-frames.h \
  /home/louis/esp/esp-idf/components/esp32/include/rom/ets_sys.h \
@@ -135,10 +135,10 @@ vr_remote_host_main.o: \
  /home/louis/esp/esp-idf/components/esp32/include/esp_assert.h \
  /home/louis/esp/esp-idf/components/newlib/platform_include/assert.h \
  /home/louis/esp/esp-idf/components/newlib/include/assert.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/projdefs.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/portable.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/deprecated_definitions.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/portmacro.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/projdefs.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/portable.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/deprecated_definitions.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/portmacro.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/xtruntime.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/config/specreg.h \
  /home/louis/esp/esp-idf/components/esp32/include/xtensa/xtruntime-core-state.h \
@@ -149,8 +149,8 @@ vr_remote_host_main.o: \
  /home/louis/esp/esp-idf/components/heap/include/multi_heap.h \
  /home/louis/esp/esp-idf/components/soc/include/soc/soc_memory_layout.h \
  /home/louis/esp/esp-idf/components/esp32/include/esp_attr.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/portbenchmark.h \
- /home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/mpu_wrappers.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/portbenchmark.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/mpu_wrappers.h \
  /home/louis/esp/esp-idf/components/esp32/include/esp_system.h \
  /home/louis/esp/esp-idf/components/esp32/include/esp_sleep.h \
  /home/louis/esp/esp-idf/components/driver/include/driver/gpio.h \
@@ -169,8 +169,21 @@ vr_remote_host_main.o: \
  /home/louis/esp/esp-idf/components/esp32/include/esp_intr.h \
  /home/louis/esp/esp-idf/components/esp32/include/rom/ets_sys.h \
  /home/louis/esp/esp-idf/components/freertos/include/freertos/xtensa_api.h \
- /home/louis/esp/esp-idf/components/freertos/include/freertos/xtensa_context.h \
- /home/louis/esp/esp-idf/components/soc/esp32/include/soc/touch_channel.h
+ /home/louis/esp/esp-idf/components/soc/esp32/include/soc/touch_channel.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/task.h \
+ /home/louis/esp/esp-idf/components/newlib/include/limits.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/list.h \
+ /home/louis/esp/esp-idf/components/driver/include/driver/spi_master.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/semphr.h \
+ /home/louis/esp/esp-idf/components/freertos/include/freertos/queue.h \
+ /home/louis/esp/esp-idf/components/driver/include/driver/spi_common.h \
+ /home/louis/esp/esp-idf/components/esp32/include/rom/lldesc.h \
+ /home/louis/esp/esp-idf/components/esp32/include/rom/queue.h \
+ /home/louis/esp/esp-idf/components/soc/include/soc/spi_periph.h \
+ /home/louis/esp/esp-idf/components/soc/esp32/include/soc/periph_defs.h \
+ /home/louis/esp/esp-idf/components/soc/esp32/include/soc/spi_pins.h \
+ /home/louis/esp/esp-idf/components/soc/esp32/include/soc/spi_reg.h \
+ /home/louis/esp/esp-idf/components/soc/esp32/include/soc/spi_struct.h
 
 /home/louis/esp/esp-idf/components/newlib/include/inttypes.h:
 
@@ -214,6 +227,16 @@ vr_remote_host_main.o: \
 
 /home/louis/esp/esp-idf/components/newlib/include/sys/stdio.h:
 
+/home/louis/esp/esp-idf/components/newlib/include/stdlib.h:
+
+/home/louis/esp/esp-idf/components/newlib/include/machine/stdlib.h:
+
+/home/louis/esp/esp-idf/components/newlib/include/alloca.h:
+
+/home/louis/esp/esp-idf/components/newlib/include/string.h:
+
+/home/louis/esp/esp-idf/components/newlib/include/sys/string.h:
+
 /home/louis/esp/esp-idf/components/btstack/include/btstack_config.h:
 
 /home/louis/esp/esp-idf/components/btstack/src/btstack.h:
@@ -235,10 +258,6 @@ vr_remote_host_main.o: \
 /home/louis/esp/esp-idf/components/btstack/src/btstack_control.h:
 
 /home/louis/esp/esp-idf/components/btstack/src/btstack_util.h:
-
-/home/louis/esp/esp-idf/components/newlib/include/string.h:
-
-/home/louis/esp/esp-idf/components/newlib/include/sys/string.h:
 
 /home/louis/esp/esp-idf/components/btstack/src/btstack_defines.h:
 
@@ -277,12 +296,6 @@ vr_remote_host_main.o: \
 /home/louis/esp/esp-idf/components/btstack/src/btstack_linked_list.h:
 
 /home/louis/esp/esp-idf/components/btstack/src/btstack_defines.h:
-
-/home/louis/esp/esp-idf/components/newlib/include/stdlib.h:
-
-/home/louis/esp/esp-idf/components/newlib/include/machine/stdlib.h:
-
-/home/louis/esp/esp-idf/components/newlib/include/alloca.h:
 
 /home/louis/esp/esp-idf/components/btstack/src/btstack_hid_parser.h:
 
@@ -406,13 +419,13 @@ vr_remote_host_main.o: \
 
 /home/louis/esp/esp-idf/components/btstack/src/classic/spp_server.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/FreeRTOS.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/FreeRTOS.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/FreeRTOSConfig.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/FreeRTOSConfig.h:
 
-/home/louis/esp/vr_remote_host/build/include/sdkconfig.h:
+/home/louis/projects/tondeuse/tondeuseESP32/vr_remote_host/build/include/sdkconfig.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/xtensa_config.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/xtensa_config.h:
 
 /home/louis/esp/esp-idf/components/esp32/include/xtensa/hal.h:
 
@@ -426,7 +439,7 @@ vr_remote_host_main.o: \
 
 /home/louis/esp/esp-idf/components/esp32/include/xtensa/config/system.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/xtensa_context.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/xtensa_context.h:
 
 /home/louis/esp/esp-idf/components/esp32/include/xtensa/corebits.h:
 
@@ -442,13 +455,13 @@ vr_remote_host_main.o: \
 
 /home/louis/esp/esp-idf/components/newlib/include/assert.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/projdefs.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/projdefs.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/portable.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/portable.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/deprecated_definitions.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/deprecated_definitions.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/portmacro.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/portmacro.h:
 
 /home/louis/esp/esp-idf/components/esp32/include/xtensa/xtruntime.h:
 
@@ -470,9 +483,9 @@ vr_remote_host_main.o: \
 
 /home/louis/esp/esp-idf/components/esp32/include/esp_attr.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/portbenchmark.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/portbenchmark.h:
 
-/home/louis/esp/vr_remote_host/main/../../esp-idf/components/freertos/include/freertos/mpu_wrappers.h:
+/home/louis/esp/esp-idf/components/freertos/include/freertos/mpu_wrappers.h:
 
 /home/louis/esp/esp-idf/components/esp32/include/esp_system.h:
 
@@ -510,7 +523,33 @@ vr_remote_host_main.o: \
 
 /home/louis/esp/esp-idf/components/freertos/include/freertos/xtensa_api.h:
 
-/home/louis/esp/esp-idf/components/freertos/include/freertos/xtensa_context.h:
-
 /home/louis/esp/esp-idf/components/soc/esp32/include/soc/touch_channel.h:
-/home/louis/esp/vr_remote_host/main/./vr_remote_host_main.c:
+
+/home/louis/esp/esp-idf/components/freertos/include/freertos/task.h:
+
+/home/louis/esp/esp-idf/components/newlib/include/limits.h:
+
+/home/louis/esp/esp-idf/components/freertos/include/freertos/list.h:
+
+/home/louis/esp/esp-idf/components/driver/include/driver/spi_master.h:
+
+/home/louis/esp/esp-idf/components/freertos/include/freertos/semphr.h:
+
+/home/louis/esp/esp-idf/components/freertos/include/freertos/queue.h:
+
+/home/louis/esp/esp-idf/components/driver/include/driver/spi_common.h:
+
+/home/louis/esp/esp-idf/components/esp32/include/rom/lldesc.h:
+
+/home/louis/esp/esp-idf/components/esp32/include/rom/queue.h:
+
+/home/louis/esp/esp-idf/components/soc/include/soc/spi_periph.h:
+
+/home/louis/esp/esp-idf/components/soc/esp32/include/soc/periph_defs.h:
+
+/home/louis/esp/esp-idf/components/soc/esp32/include/soc/spi_pins.h:
+
+/home/louis/esp/esp-idf/components/soc/esp32/include/soc/spi_reg.h:
+
+/home/louis/esp/esp-idf/components/soc/esp32/include/soc/spi_struct.h:
+/home/louis/projects/tondeuse/tondeuseESP32/vr_remote_host/main/./vr_remote_host_main.c:

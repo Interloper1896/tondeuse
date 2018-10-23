@@ -1,0 +1,152 @@
+Button C:
+usage_page: c, usage: e9, value: 1
+usage_page: c, usage: 0, value: 1
+
+Button B:
+usage_page: c, usage: 46, value: 1
+usage_page: c, usage: 0, value: 1
+
+Button A:
+usage_page: 9, usage: 1, value: 1
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: 0
+usage_page: 1, usage: 31, value: 0
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: 0
+usage_page: 1, usage: 31, value: 0
+
+Button D:
+usage_page: c, usage: ea, value: 1
+usage_page: c, usage: 0, value: 1
+
+Button up:
+usage_page: 9, usage: 1, value: 1
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: 0
+usage_page: 1, usage: 31, value: 0
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: 0
+usage_page: 1, usage: 31, value: 0
+
+Button down:
+usage_page: c, usage: 46, value: 1
+usage_page: c, usage: 0, value: 1
+
+Joystick up: (extract)
+usage_page: 1, usage: 31, value: fffffff1
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: 0
+usage_page: 1, usage: 31, value: fffffff9
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: 0
+usage_page: 1, usage: 31, value: fffffffd
+
+Joystick down: (extract)
+usage_page: 1, usage: 31, value: b
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: 0
+usage_page: 1, usage: 31, value: a
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: 0
+usage_page: 1, usage: 31, value: 7
+
+Joystick left: (extract)
+usage_page: 1, usage: 30, value: fffffff3
+usage_page: 1, usage: 31, value: 0
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: fffffff9
+usage_page: 1, usage: 31, value: 0
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: fffffffd
+
+Joystick right: (extract)
+usage_page: 1, usage: 30, value: f
+usage_page: 1, usage: 31, value: 0
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: b
+usage_page: 1, usage: 31, value: 0
+usage_page: 9, usage: 1, value: 0
+usage_page: 9, usage: 2, value: 0
+usage_page: 9, usage: 3, value: 0
+usage_page: 9, usage: 4, value: 0
+usage_page: 9, usage: 5, value: 0
+usage_page: 1, usage: 30, value: 2
+
+
+Affichages:
+appui A:
+Button A or up
+
+Joystick left/right:0
+Joystick up/down:0
+Joystick left/right:0
+Joystick up/down:0
+
+appui B:
+Button B or down
+
+appui C:
+Button C
+
+appui D:
+Button D
+
+appui up:
+Button A or up
+
+Joystick left/right:0
+Joystick up/down:0
+Joystick left/right:0
+Joystick up/down:0
+
+appui down:
+Button B or down
+
+Joystick:
+up -15
+down 15
+left -15
+right 15
+
